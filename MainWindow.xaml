@@ -6,17 +6,34 @@
         xmlns:local="clr-namespace:captureFS"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="captureFS.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="242.739" Width="512.448">
+        Title="CaptureFS" Height="287.009" Width="497.05" Background="#FFFEFFE6" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Button x:Name="btnFS" Content="Connect" Click="btnFS_Click" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="115" Height="37"/>
-        <Label Content="Label" x:Name="lblStatus" HorizontalAlignment="Left" Margin="144,16,0,0" VerticalAlignment="Top" Width="170" Height="26"/>
-
-        <syncfusion:IntegerTextBox Name="txtInterval"  HorizontalAlignment="Left" Height="23" Margin="10,70,0,0" MinWidth="100" NumberGroupSeparator="." TextWrapping="Wrap" Text="2000" VerticalAlignment="Top" Width="100"/>
-        <CheckBox Content="Drone Forward" Name="chkForward" HorizontalAlignment="Left" Margin="26,112,0,0" VerticalAlignment="Top" Width="155" Height="15"/>
-        <CheckBox Content="Drone Look Down" Name="chkLookDown" HorizontalAlignment="Left" Margin="26,139,0,0" VerticalAlignment="Top" Height="15" Width="114"/>
+        <Label Content="N/A" x:Name="lblStatus" HorizontalAlignment="Left" Margin="198,16,0,0" VerticalAlignment="Top" Width="232" Height="26"/>
+        <Button Name="btnPath" Content="Image Path" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Width="115" Click="btnPath_Click" Height="38"/>
+        <Label Content="Label" Name="lblPath" HorizontalAlignment="Left" Margin="198,58,0,0" VerticalAlignment="Top" Width="232"/>
+        <Label FontWeight="Bold" Content="Status:" HorizontalAlignment="Left" Margin="142,16,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273"/>
+        <Label FontWeight="Bold" Content="Path:" HorizontalAlignment="Left" Margin="142,58,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273"/>
+        <syncfusion:TimeSpanEdit x:Name="timeInterval" ValueChanged="timeInterval_ValueChanged" HorizontalAlignment="Left" Height="22" Margin="10,125,0,0" TextWrapping="Wrap" Text="TimeSpanEdit" VerticalAlignment="Top" Width="115" Format="s" Value="0:0:0:2"/>
+        <Label FontWeight="Bold" Content="Interval (seconds)" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Width="115"/>
+        <Button Content="Start/Stop" Name="btnCapture" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" Width="115" Click="btnCapture_Click" Height="38"/>
+        <StackPanel Name="stackFSActions" HorizontalAlignment="Left" Height="150" Margin="142,96,0,0" VerticalAlignment="Top" Width="170">
+            <Label FontWeight="Bold">FS Actions (Drone Camera)</Label>
+            <RadioButton Name="rdForward">Forward (W)</RadioButton>
+            <RadioButton Name="rdBackwards">Backward (S)</RadioButton>
+            <RadioButton Name="rdLeft">Left (A)</RadioButton>
+            <RadioButton Name="rdRight">Right (D)</RadioButton>
+            <RadioButton Name="rdLookup">Look Up (Numpad 8)</RadioButton>
+            <RadioButton Name="rdLookdown">Look Down (Numpad 2)</RadioButton>
+            <RadioButton Name="rdLookleft">Look Left (Numpad 4)</RadioButton>
+            <RadioButton Name="rdLookright">Look Right (Numpad 6)</RadioButton>
+        </StackPanel>
+        <Label FontWeight="Bold" Content="Images Saved:" HorizontalAlignment="Left" Margin="324,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273"/>
+        <Label Content="0" x:Name="lblImagesSaved" HorizontalAlignment="Left" Margin="420,96,0,0" VerticalAlignment="Top" Width="60"/>
+        <Button Content="Reset Counter" x:Name="btnResetCounter" HorizontalAlignment="Left" Margin="329,127,0,0" VerticalAlignment="Top" Width="101" Click="btnResetCounter_Click" Height="20"/>
 
     </Grid>
 </Window>

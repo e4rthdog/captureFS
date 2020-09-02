@@ -86,16 +86,29 @@ namespace captureFS
         public Direct3D11CaptureFrame frame;
         public int image_counter = 1;
         public DispatcherTimer timerFS;
+        public string imagePath;
 
         public MainWindow()
         {
+            Setup();
             InitializeComponent();
+            SetupUI();
+        }
+
+        private void Setup()
+        {
+            imagePath = string.Empty;
             process = Process.GetProcesses().Where(p => p.ProcessName == "FlightSimulator").Single();
             hwnd = process.MainWindowHandle;
             timerFS = new DispatcherTimer();
-            timerFS.Tick += timerFS_Tick;
             timerFS.Interval = new TimeSpan(0, 0, 2);
-            timerFS.Start();
+            timerFS.Tick += timerFS_Tick;
+            timerFS.IsEnabled = false;
+
+        }
+        private void SetupUI()
+        {
+            lblPath.Content = imagePath;
         }
         private void timerFS_Tick(object sender, EventArgs e)
         {
@@ -103,13 +116,37 @@ namespace captureFS
             {
                 if (FSUIPCConnection.IsOpen)
                 {
-                    if (chkForward.IsChecked == true)
+                    if (rdForward.IsChecked == true)
                     {
                         FSUIPCConnection.SendKeyToFS(Keys.W);
                     }
-                    if (chkLookDown.IsChecked == true)
+                    if (rdBackwards.IsChecked == true)
+                    {
+                        FSUIPCConnection.SendKeyToFS(Keys.S);
+                    }
+                    if (rdLeft.IsChecked == true)
+                    {
+                        FSUIPCConnection.SendKeyToFS(Keys.A);
+                    }
+                    if (rdRight.IsChecked == true)
+                    {
+                        FSUIPCConnection.SendKeyToFS(Keys.D);
+                    }
+                    if (rdLookup.IsChecked == true)
+                    {
+                        FSUIPCConnection.SendKeyToFS(Keys.NumPad8);
+                    }
+                    if (rdLookdown.IsChecked == true)
+                    {
+                        FSUIPCConnection.SendKeyToFS(Keys.NumPad2);
+                    }
+                    if (rdLookleft.IsChecked == true)
                     {
                         FSUIPCConnection.SendKeyToFS(Keys.NumPad4);
+                    }
+                    if (rdLookright.IsChecked == true)
+                    {
+                        FSUIPCConnection.SendKeyToFS(Keys.NumPad6);
                     }
                     SavePicture();
                 }
@@ -119,7 +156,6 @@ namespace captureFS
         {
             if (FSUIPCConnection.IsOpen)
             {
-                timerFS.Stop();
                 FSUIPCConnection.Close();
             }
             else
@@ -131,17 +167,12 @@ namespace captureFS
                 }
                 catch (FSUIPCException ex)
                 {
-                    System.Windows.MessageBox.Show("Connection Failed. " + ex.Message);
-                }
-                if (FSUIPCConnection.IsOpen)
-                {
-                    timerFS.Start();
+                    System.Windows.MessageBox.Show(ex.Message, "Connection Failed. ");
                 }
             }
             setConnectionStatus();
 
         }
-
         private void setConnectionStatus()
         {
             if (FSUIPCConnection.IsOpen)
@@ -158,7 +189,10 @@ namespace captureFS
         private void SavePicture()
         {
             var img = CaptureWindow(hwnd);
-            img.Save(string.Format(@"s:\test\time1\{0:000}.png", image_counter++), ImageFormat.Png);
+            var fullpath = string.Format(@"{1}\{0:000}.png", image_counter, imagePath);
+            img.Save(fullpath, ImageFormat.Png);
+            lblImagesSaved.Content = string.Format("{0:000}", image_counter);
+            image_counter++;
         }
         public Bitmap CaptureWindow(IntPtr hWnd)
         {
@@ -205,5 +239,44 @@ namespace captureFS
 
             return result;
         }
+        private void btnPath_Click(object sender, RoutedEventArgs e)
+        {
+            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
+            {
+                System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+                imagePath = dialog.SelectedPath;
+                SetupUI();
+            }
+        }
+        private void btnCapture_Click(object sender, RoutedEventArgs e)
+        {
+            if (imagePath != String.Empty)
+            {
+                if (timerFS.IsEnabled == true)
+                {
+                    timerFS.IsEnabled = false;
+                    btnCapture.Content = "Start";
+                }
+                else
+                {
+                    timerFS.IsEnabled = true;
+                    btnCapture.Content = "Stop";
+                }
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Path is empty!", "Error");
+            }
+        }
+        private void timeInterval_ValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            timerFS.Interval = (TimeSpan)e.NewValue;
+        }
+        private void btnResetCounter_Click(object sender, RoutedEventArgs e)
+        {
+            image_counter = 1;
+            lblImagesSaved.Content = string.Format("{0:000}", 0);
+        }
+        
     }
 }

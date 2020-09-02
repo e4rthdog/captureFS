@@ -148,8 +148,16 @@ namespace captureFS
                     {
                         FSUIPCConnection.SendKeyToFS(Keys.NumPad6);
                     }
-                    SavePicture();
+                    if (rdIncreaseAlt.IsChecked == true)
+                    {
+                        FSUIPCConnection.SendKeyToFS(Keys.R);
+                    }
+                    if (rdDecreaseAlt.IsChecked == true)
+                    {
+                        FSUIPCConnection.SendKeyToFS(Keys.F);
+                    }
                 }
+                SavePicture();
             }
         }
         private void btnFS_Click(object sender, RoutedEventArgs e)
@@ -179,11 +187,13 @@ namespace captureFS
             {
                 btnFS.Content = "Disconnect";
                 lblStatus.Content = "Connected to " + FSUIPCConnection.FlightSimVersionConnected.ToString();
+                lblStatus.Foreground = System.Windows.Media.Brushes.Green;
             }
             else
             {
                 btnFS.Content = "Connect";
                 lblStatus.Content = "Disconnected";
+                lblStatus.Foreground = System.Windows.Media.Brushes.Red;
             }
         }
         private void SavePicture()
@@ -256,6 +266,8 @@ namespace captureFS
                 {
                     timerFS.IsEnabled = false;
                     btnCapture.Content = "Start";
+                    image_counter = 1;
+                    lblImagesSaved.Content = string.Format("{0:000}", 0);
                 }
                 else
                 {
@@ -272,11 +284,9 @@ namespace captureFS
         {
             timerFS.Interval = (TimeSpan)e.NewValue;
         }
-        private void btnResetCounter_Click(object sender, RoutedEventArgs e)
+        private void LeftMouseDown_Event(object sender, EventArgs e)
         {
-            image_counter = 1;
-            lblImagesSaved.Content = string.Format("{0:000}", 0);
+            this.DragMove();
         }
-        
     }
 }

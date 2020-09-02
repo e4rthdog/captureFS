@@ -6,22 +6,22 @@
         xmlns:local="clr-namespace:captureFS"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="captureFS.MainWindow"
         mc:Ignorable="d"
-        Title="CaptureFS" Height="287.009" Width="497.05" Background="#FFFEFFE6" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="CaptureFS" Height="308.823" Width="497.05" Background="#FFFEFFE6" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="13.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnFS" Content="Connect" Click="btnFS_Click" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="115" Height="37"/>
-        <Label Content="N/A" x:Name="lblStatus" HorizontalAlignment="Left" Margin="198,16,0,0" VerticalAlignment="Top" Width="232" Height="26"/>
-        <Button Name="btnPath" Content="Image Path" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Width="115" Click="btnPath_Click" Height="38"/>
-        <Label Content="Label" Name="lblPath" HorizontalAlignment="Left" Margin="198,58,0,0" VerticalAlignment="Top" Width="232"/>
-        <Label FontWeight="Bold" Content="Status:" HorizontalAlignment="Left" Margin="142,16,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273"/>
-        <Label FontWeight="Bold" Content="Path:" HorizontalAlignment="Left" Margin="142,58,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273"/>
-        <syncfusion:TimeSpanEdit x:Name="timeInterval" ValueChanged="timeInterval_ValueChanged" HorizontalAlignment="Left" Height="22" Margin="10,125,0,0" TextWrapping="Wrap" Text="TimeSpanEdit" VerticalAlignment="Top" Width="115" Format="s" Value="0:0:0:2"/>
-        <Label FontWeight="Bold" Content="Interval (seconds)" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Width="115"/>
-        <Button Content="Start/Stop" Name="btnCapture" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" Width="115" Click="btnCapture_Click" Height="38"/>
-        <StackPanel Name="stackFSActions" HorizontalAlignment="Left" Height="150" Margin="142,96,0,0" VerticalAlignment="Top" Width="170">
-            <Label FontWeight="Bold">FS Actions (Drone Camera)</Label>
+        <Button x:Name="btnFS" Content="Connect" Click="btnFS_Click" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Width="115" Height="37"/>
+        <Label Content="Disconnected" FontWeight="Bold" Foreground="Red" x:Name="lblStatus" HorizontalAlignment="Left" Margin="207,12,0,0" VerticalAlignment="Top" Width="232" Height="26"/>
+        <Button Name="btnPath" Content="Image Path" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top" Width="115" Click="btnPath_Click" Height="38"/>
+        <Label Content="Not Defined" Name="lblPath" FontWeight="Bold" HorizontalAlignment="Left" Margin="207,54,0,0" VerticalAlignment="Top" Width="232" Height="26"/>
+        <Label FontWeight="Bold" Content="Status:" HorizontalAlignment="Left" Margin="151,12,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Height="26" Width="48"/>
+        <Label FontWeight="Bold" Content="Path:" HorizontalAlignment="Left" Margin="151,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Height="26" Width="38"/>
+        <syncfusion:TimeSpanEdit x:Name="timeInterval" ValueChanged="timeInterval_ValueChanged" HorizontalAlignment="Left" Height="22" Margin="10,121,0,0" TextWrapping="Wrap" Text="TimeSpanEdit" VerticalAlignment="Top" Width="115" Format="s" Value="0:0:0:2"/>
+        <Label FontWeight="Bold" Content="Interval (seconds)" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Width="115" Height="26"/>
+        <Button Content="Start Capture" Name="btnCapture" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" Width="115" Click="btnCapture_Click" Height="38"/>
+        <StackPanel Name="stackFSActions" HorizontalAlignment="Left" Height="180" Margin="151,92,0,0" VerticalAlignment="Top" Width="170">
+            <Label FontWeight="Bold" Margin="-3,0,2.6,0">FS Actions (Drone Camera)</Label>
             <RadioButton Name="rdForward">Forward (W)</RadioButton>
             <RadioButton Name="rdBackwards">Backward (S)</RadioButton>
             <RadioButton Name="rdLeft">Left (A)</RadioButton>
@@ -30,10 +30,11 @@
             <RadioButton Name="rdLookdown">Look Down (Numpad 2)</RadioButton>
             <RadioButton Name="rdLookleft">Look Left (Numpad 4)</RadioButton>
             <RadioButton Name="rdLookright">Look Right (Numpad 6)</RadioButton>
+            <RadioButton Name="rdIncreaseAlt">Increase Altitude (R)</RadioButton>
+            <RadioButton Name="rdDecreaseAlt">Increase Altitude (F)</RadioButton>
         </StackPanel>
-        <Label FontWeight="Bold" Content="Images Saved:" HorizontalAlignment="Left" Margin="324,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273"/>
-        <Label Content="0" x:Name="lblImagesSaved" HorizontalAlignment="Left" Margin="420,96,0,0" VerticalAlignment="Top" Width="60"/>
-        <Button Content="Reset Counter" x:Name="btnResetCounter" HorizontalAlignment="Left" Margin="329,127,0,0" VerticalAlignment="Top" Width="101" Click="btnResetCounter_Click" Height="20"/>
+        <Label FontWeight="Bold" Content="Images Saved:" HorizontalAlignment="Left" Margin="5,207,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Height="26" Width="90"/>
+        <Label Content="0" x:Name="lblImagesSaved" HorizontalAlignment="Left" Margin="94,208,0,0" VerticalAlignment="Top" Width="41" Height="26"/>
 
     </Grid>
 </Window>

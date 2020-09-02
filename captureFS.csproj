@@ -132,4 +132,7 @@
     <Resource Include="13.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>git describe --long --always &gt; $(ProjectDir)version.txt</PreBuildEvent>
+  </PropertyGroup>
 </Project>

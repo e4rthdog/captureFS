@@ -308,6 +308,7 @@ namespace CaptureFS
                 {
                     timerFS.IsEnabled = false;
                     btnCapture.Content = "Start";
+                    btnCapture.Background = System.Windows.Media.Brushes.LightGray;
                     image_counter = 1;
                     lblImagesSaved.Content = string.Format("{0:000}", 0);
                 }
@@ -315,6 +316,7 @@ namespace CaptureFS
                 {
                     timerFS.IsEnabled = true;
                     btnCapture.Content = "Stop";
+                    btnCapture.Background = System.Windows.Media.Brushes.LightGreen;
                 }
             }
             else

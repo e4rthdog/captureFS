@@ -36,6 +36,7 @@
         </StackPanel>
         <Label FontWeight="Bold" Content="Images Saved:" HorizontalAlignment="Left" Margin="5,207,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Height="26" Width="90"/>
         <Label Content="0" x:Name="lblImagesSaved" HorizontalAlignment="Left" Margin="94,208,0,0" VerticalAlignment="Top" Width="41" Height="26"/>
+        <Label Content="Version"  Name="lblVersion" FontSize="10px" HorizontalAlignment="Left" Margin="4,273,0,0" VerticalAlignment="Top" Width="121" Height="22"/>
 
     </Grid>
 </Window>

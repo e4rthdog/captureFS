@@ -79,6 +79,7 @@ namespace CaptureFS
             Setup();
             InitializeComponent();
             HandleDroneActions(false);
+            lblVersion.Content = String.Concat("Version - ", Util.GetVersion());
             SetupUI();
         }
 
@@ -91,7 +92,6 @@ namespace CaptureFS
             timerFS.Interval = new TimeSpan(0, 0, 2);
             timerFS.Tick += timerFS_Tick;
             timerFS.IsEnabled = false;
-
         }
         private void HandleDroneActions(Boolean _mode)
         {

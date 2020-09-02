@@ -79,15 +79,22 @@ namespace CaptureFS
             Setup();
             InitializeComponent();
             HandleDroneActions(false);
-            lblVersion.Content = String.Concat("Version - ", Util.GetVersion(), " - ",Util.GetCopyright());
-            SetupUI();
+            lblVersion.Content = String.Concat("Version - ", Util.GetVersion(), " - ", Util.GetCopyright());
+            imagePath = string.Empty;
+            lblPath.Content = imagePath;
+            try
+            {
+                process = Process.GetProcessesByName("FlightSimulatord").Single();
+            } catch
+            {
+                System.Windows.MessageBox.Show("MSFS is NOT Running!!!", "ERROR");
+                Environment.Exit(0);
+            }
+            hwnd = process.MainWindowHandle;
         }
 
         private void Setup()
         {
-            imagePath = string.Empty;
-            process = Process.GetProcesses().Where(p => p.ProcessName == "FlightSimulator").Single();
-            hwnd = process.MainWindowHandle;
             timerFS = new DispatcherTimer();
             timerFS.Interval = new TimeSpan(0, 0, 2);
             timerFS.Tick += timerFS_Tick;
@@ -126,10 +133,6 @@ namespace CaptureFS
                 rdDecreaseAlt.IsEnabled = false;
 
             }
-        }
-        private void SetupUI()
-        {
-            lblPath.Content = imagePath;
         }
         private void timerFS_Tick(object sender, EventArgs e)
         {
@@ -278,7 +281,7 @@ namespace CaptureFS
             {
                 System.Windows.Forms.DialogResult result = dialog.ShowDialog();
                 imagePath = dialog.SelectedPath;
-                SetupUI();
+                lblPath.Content = imagePath;
             }
         }
         private void btnCapture_Click(object sender, RoutedEventArgs e)

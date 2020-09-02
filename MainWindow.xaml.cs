@@ -22,6 +22,7 @@ using FSUIPC;
 using System.Windows.Threading;
 using System.Windows.Forms;
 using System.Configuration;
+using System.IO;
 
 namespace CaptureFS
 {
@@ -74,19 +75,31 @@ namespace CaptureFS
         public int image_counter = 1;
         public DispatcherTimer timerFS;
         public string imagePath;
+        public ConfigClass cfg;
 
         public MainWindow()
         {
             Setup();
             InitializeComponent();
             HandleDroneActions(false);
+            cfg = Util.LoadConfig("MAIN");
+            if (Directory.Exists(cfg.ImagePath))
+            {
+                imagePath = cfg.ImagePath;
+            }
+            else
+            {
+                imagePath = string.Empty;
+                cfg.ImagePath = "";
+                Util.SaveConfig(cfg);
+            }
             lblVersion.Content = String.Concat("Version - ", Util.GetVersion(), " - ", Util.GetCopyright());
-            imagePath = string.Empty;
             lblPath.Content = imagePath;
             try
             {
                 process = Process.GetProcessesByName("FlightSimulator").Single();
-            } catch
+            }
+            catch
             {
                 System.Windows.MessageBox.Show("MSFS is NOT Running!!!", "ERROR");
                 Environment.Exit(0);
@@ -283,6 +296,8 @@ namespace CaptureFS
                 System.Windows.Forms.DialogResult result = dialog.ShowDialog();
                 imagePath = dialog.SelectedPath;
                 lblPath.Content = imagePath;
+                cfg.ImagePath = imagePath;
+                Util.SaveConfig(cfg);
             }
         }
         private void btnCapture_Click(object sender, RoutedEventArgs e)
@@ -310,10 +325,6 @@ namespace CaptureFS
         private void timeInterval_ValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             timerFS.Interval = (TimeSpan)e.NewValue;
-        }
-        private void LeftMouseDown_Event(object sender, EventArgs e)
-        {
-            this.DragMove();
         }
     }
 }

@@ -21,6 +21,7 @@ using System.Drawing.Imaging;
 using FSUIPC;
 using System.Windows.Threading;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace CaptureFS
 {
@@ -84,7 +85,7 @@ namespace CaptureFS
             lblPath.Content = imagePath;
             try
             {
-                process = Process.GetProcessesByName("FlightSimulatord").Single();
+                process = Process.GetProcessesByName("FlightSimulator").Single();
             } catch
             {
                 System.Windows.MessageBox.Show("MSFS is NOT Running!!!", "ERROR");

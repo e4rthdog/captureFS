@@ -12,12 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Windows.Graphics;
-using Windows.Graphics.Capture;
-using Windows.Graphics.DirectX;
-using Microsoft.Graphics.Canvas;
 using System.Diagnostics;
-using Windows.Storage;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.InteropServices;
 using System.Drawing;
@@ -78,12 +73,6 @@ namespace captureFS
 
         public Process process;
         public IntPtr hwnd;
-        public GraphicsCaptureItem item;
-        public Direct3D11CaptureFramePool framePool;
-        public GraphicsCaptureSession session;
-        public CanvasDevice canvasDevice;
-        public SizeInt32 lastSize;
-        public Direct3D11CaptureFrame frame;
         public int image_counter = 1;
         public DispatcherTimer timerFS;
         public string imagePath;

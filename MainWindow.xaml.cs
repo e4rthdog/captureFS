@@ -79,7 +79,7 @@ namespace CaptureFS
             Setup();
             InitializeComponent();
             HandleDroneActions(false);
-            lblVersion.Content = String.Concat("Version - ", Util.GetVersion());
+            lblVersion.Content = String.Concat("Version - ", Util.GetVersion(), " - ",Util.GetCopyright());
             SetupUI();
         }
 

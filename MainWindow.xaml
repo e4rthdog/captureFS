@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:captureFS"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="captureFS.MainWindow"
+        xmlns:local="clr-namespace:CaptureFS"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="CaptureFS.MainWindow"
         mc:Ignorable="d"
         Title="CaptureFS" Height="329.353" Width="353.335" Background="#FFFEFFE6" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="13.png">
     <Grid>

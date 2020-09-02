@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CaptureFS"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="CaptureFS.MainWindow"
         mc:Ignorable="d"
-        Title="CaptureFS" Height="344.751" Width="353.335" Background="#FFFEFFE6" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="13.png">
+        Title="CaptureFS" Height="329.353" Width="353.335" Background="#FFFEFFE6" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="13.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -22,21 +22,21 @@
         <Button Content="Start Capture" Name="btnCapture" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" Width="115" Click="btnCapture_Click" Height="38"/>
         <StackPanel Name="stackFSActions" HorizontalAlignment="Left" Height="195" Margin="151,92,0,0" VerticalAlignment="Top" Width="170">
             <Label FontWeight="Bold" Margin="-3,0,2.6,0">FS Actions (Drone Camera)</Label>
-            <RadioButton GroupName="DroneActions" Name="rdNone" IsChecked="True">Disabled</RadioButton>
-            <RadioButton GroupName="DroneActions" Name="rdForward">Forward (W)</RadioButton>
-            <RadioButton GroupName="DroneActions" Name="rdBackwards">Backward (S)</RadioButton>
-            <RadioButton GroupName="DroneActions" Name="rdLeft">Left (A)</RadioButton>
-            <RadioButton GroupName="DroneActions" Name="rdRight">Right (D)</RadioButton>
-            <RadioButton GroupName="DroneActions" Name="rdLookup">Look Up (Numpad 8)</RadioButton>
-            <RadioButton GroupName="DroneActions" Name="rdLookdown">Look Down (Numpad 2)</RadioButton>
-            <RadioButton GroupName="DroneActions" Name="rdLookleft">Look Left (Numpad 4)</RadioButton>
-            <RadioButton GroupName="DroneActions" Name="rdLookright">Look Right (Numpad 6)</RadioButton>
-            <RadioButton GroupName="DroneActions" Name="rdIncreaseAlt">Increase Altitude (R)</RadioButton>
-            <RadioButton GroupName="DroneActions" Name="rdDecreaseAlt">Decrease Altitude (F)</RadioButton>
+            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdNone" IsChecked="True">Disabled</RadioButton>
+            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdForward">Forward (W)</RadioButton>
+            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdBackwards">Backward (S)</RadioButton>
+            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLeft">Left (A)</RadioButton>
+            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdRight">Right (D)</RadioButton>
+            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLookup">Look Up (Numpad 8)</RadioButton>
+            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLookdown">Look Down (Numpad 2)</RadioButton>
+            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLookleft">Look Left (Numpad 4)</RadioButton>
+            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLookright">Look Right (Numpad 6)</RadioButton>
+            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdIncreaseAlt">Increase Altitude (R)</RadioButton>
+            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdDecreaseAlt">Decrease Altitude (F)</RadioButton>
         </StackPanel>
         <Label FontWeight="Bold" Content="Images Saved:" HorizontalAlignment="Left" Margin="5,207,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Height="26" Width="90"/>
         <Label Content="0" x:Name="lblImagesSaved" HorizontalAlignment="Left" Margin="94,208,0,0" VerticalAlignment="Top" Width="41" Height="26"/>
-        <Label Content="Version"  Name="lblVersion" FontSize="10px" HorizontalAlignment="Left" Margin="4,284,0,0" VerticalAlignment="Top" Width="333" Height="22"/>
+        <Label Content="Version"  Name="lblVersion" FontSize="10px" HorizontalAlignment="Left" Margin="4,272,0,0" VerticalAlignment="Top" Width="333" Height="22"/>
 
     </Grid>
 </Window>

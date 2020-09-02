@@ -92,6 +92,7 @@ namespace captureFS
         {
             Setup();
             InitializeComponent();
+            HandleDroneActions(false);
             SetupUI();
         }
 
@@ -105,6 +106,40 @@ namespace captureFS
             timerFS.Tick += timerFS_Tick;
             timerFS.IsEnabled = false;
 
+        }
+        private void HandleDroneActions(Boolean _mode)
+        {
+            if (_mode)
+            {
+                rdNone.IsChecked = true;
+                rdNone.IsEnabled = true;
+                rdForward.IsEnabled = true;
+                rdBackwards.IsEnabled = true;
+                rdLeft.IsEnabled = true;
+                rdRight.IsEnabled = true;
+                rdLookup.IsEnabled = true;
+                rdLookdown.IsEnabled = true;
+                rdLookleft.IsEnabled = true;
+                rdLookright.IsEnabled = true;
+                rdIncreaseAlt.IsEnabled = true;
+                rdDecreaseAlt.IsEnabled = true;
+            }
+            else
+            {
+                rdNone.IsChecked = true;
+                rdNone.IsEnabled = false;
+                rdForward.IsEnabled = false;
+                rdBackwards.IsEnabled = false;
+                rdLeft.IsEnabled = false;
+                rdRight.IsEnabled = false;
+                rdLookup.IsEnabled = false;
+                rdLookdown.IsEnabled = false;
+                rdLookleft.IsEnabled = false;
+                rdLookright.IsEnabled = false;
+                rdIncreaseAlt.IsEnabled = false;
+                rdDecreaseAlt.IsEnabled = false;
+
+            }
         }
         private void SetupUI()
         {
@@ -164,6 +199,7 @@ namespace captureFS
         {
             if (FSUIPCConnection.IsOpen)
             {
+                HandleDroneActions(false);
                 FSUIPCConnection.Close();
             }
             else
@@ -172,6 +208,7 @@ namespace captureFS
                 try
                 {
                     FSUIPCConnection.Open();
+                    HandleDroneActions(true);
                 }
                 catch (FSUIPCException ex)
                 {

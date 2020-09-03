@@ -283,6 +283,7 @@ namespace CaptureFS
             {
                 SelectObject(memoryDc, oldBitmap);
                 DeleteObject(bitmap);
+                DeleteObject(oldBitmap);
                 DeleteDC(memoryDc);
                 ReleaseDC(desktophWnd, desktopDc);
             }

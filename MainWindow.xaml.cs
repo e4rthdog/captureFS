@@ -241,6 +241,7 @@ namespace CaptureFS
             var img = CaptureWindow(hwnd);
             var fullpath = string.Format(@"{1}\{0:000}.png", image_counter, imagePath);
             img.Save(fullpath, ImageFormat.Png);
+            img.Dispose();
             lblImagesSaved.Content = string.Format("{0:000}", image_counter);
             image_counter++;
         }

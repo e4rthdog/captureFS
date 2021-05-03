@@ -27,18 +27,32 @@
             <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdBackwards">Backward (S)</RadioButton>
             <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLeft">Left (A)</RadioButton>
             <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdRight">Right (D)</RadioButton>
-            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLookup">Look Up (Numpad 8)</RadioButton>
-            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLookdown">Look Down (Numpad 2)</RadioButton>
-            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLookleft">Look Left (Numpad 4)</RadioButton>
-            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLookright">Look Right (Numpad 6)</RadioButton>
+            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLookup">Look Up (Numpad8)</RadioButton>
+            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLookdown">Look Down (Numpad2)</RadioButton>
+            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLookleft">Look Left (Numpad4)</RadioButton>
+            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLookright">Look Right (Numpad6)</RadioButton>
             <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdIncreaseAlt">Increase Altitude (R)</RadioButton>
             <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdDecreaseAlt">Decrease Altitude (F)</RadioButton>
-            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdCustomActions" Checked="rdCustomActions_Checked">Custom</RadioButton>
+            <RadioButton ToolTipService.ShowDuration="5000" GroupName="DroneActions" FontSize="11px" Name="rdCustomActions" Checked="rdCustomActions_Checked" Unchecked="rdCustomActions_Unchecked">Custom
+                <RadioButton.ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" FontSize="12" Margin="0,0,0,5">Sequence of actions</TextBlock>
+                        <TextBlock>
+                            Separate the actions with comma (,). <LineBreak />
+                            Use valid values from FS Actions above: <LineBreak /><LineBreak />
+                            W,S,A,D,NUMPAD8,NUMPAD2,NUMPAD4,NUMPAD6,R,F
+                        </TextBlock>
+                        <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                        <TextBlock FontStyle="Italic">Example: w,r,numpad6<LineBreak/></TextBlock>
+                        <TextBlock FontStyle="Italic">Case is NOT important!<LineBreak/></TextBlock>
+                    </StackPanel>
+                </RadioButton.ToolTip>
+            </RadioButton>
         </StackPanel>
         <Label FontWeight="Bold" Content="Images Saved:" HorizontalAlignment="Left" Margin="5,207,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Height="26" Width="90"/>
         <Label Content="0" x:Name="lblImagesSaved" HorizontalAlignment="Left" Margin="94,208,0,0" VerticalAlignment="Top" Width="41" Height="26"/>
-        <Label Content="Version"  Name="lblVersion" FontSize="10px" HorizontalAlignment="Left" Margin="4,314,0,0" VerticalAlignment="Top" Width="333" Height="22"/>
-        <TextBox x:Name="txtCustom" HorizontalAlignment="Left" Height="18" Margin="151,286,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="10" IsEnabled="False"/>
+        <Label Content="Version"  Name="lblVersion" FontSize="10px" HorizontalAlignment="Left" Margin="4,312,0,0" VerticalAlignment="Top" Width="333" Height="22"/>
+        <TextBox x:Name="txtCustom" HorizontalAlignment="Left" Height="18" Margin="151,286,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="10" IsEnabled="False" LostFocus="txtCustom_LostFocus"/>
 
     </Grid>
 </Window>

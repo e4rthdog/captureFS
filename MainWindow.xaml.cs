@@ -86,11 +86,14 @@ namespace CaptureFS
             if (Directory.Exists(cfg.ImagePath))
             {
                 imagePath = cfg.ImagePath;
+                txtCustom.Text = cfg.CustomActions;
             }
             else
             {
                 imagePath = string.Empty;
+                txtCustom.Text = string.Empty;
                 cfg.ImagePath = "";
+                cfg.CustomActions = "";
                 Util.SaveConfig(cfg);
             }
             lblVersion.Content = String.Concat("Version - ", Util.GetVersion(), " - ", Util.GetCopyright());
@@ -130,6 +133,7 @@ namespace CaptureFS
                 rdLookright.IsEnabled = true;
                 rdIncreaseAlt.IsEnabled = true;
                 rdDecreaseAlt.IsEnabled = true;
+                rdCustomActions.IsEnabled = true;
             }
             else
             {
@@ -145,6 +149,8 @@ namespace CaptureFS
                 rdLookright.IsEnabled = false;
                 rdIncreaseAlt.IsEnabled = false;
                 rdDecreaseAlt.IsEnabled = false;
+                rdCustomActions.IsEnabled = false;
+                txtCustom.IsEnabled = false;
 
             }
         }
@@ -193,6 +199,22 @@ namespace CaptureFS
                     if (rdDecreaseAlt.IsChecked == true)
                     {
                         FSUIPCConnection.SendKeyToFS(Keys.F);
+                    }
+                    if (rdCustomActions.IsChecked == true)
+                    {
+                        var arrCustom = txtCustom.Text.Split(',');
+                        if (arrCustom.Length > 0)
+                        {
+                            foreach (var item in arrCustom)
+                            {
+                                try
+                                {
+                                    FSUIPCConnection.SendKeyToFS((Keys)Enum.Parse(typeof(Keys), item, true));
+                                }
+                                catch { }
+                            }
+                        }
+
                     }
                 }
                 SavePicture();
@@ -334,6 +356,17 @@ namespace CaptureFS
         private void rdCustomActions_Checked(object sender, RoutedEventArgs e)
         {
             txtCustom.IsEnabled = true;
+        }
+
+        private void rdCustomActions_Unchecked(object sender, RoutedEventArgs e)
+        {
+            txtCustom.IsEnabled = false;
+        }
+
+        private void txtCustom_LostFocus(object sender, RoutedEventArgs e)
+        {
+            cfg.CustomActions = txtCustom.Text;
+            Util.SaveConfig(cfg);
         }
     }
 }

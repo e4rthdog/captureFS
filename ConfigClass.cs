@@ -9,5 +9,6 @@ namespace CaptureFS
     public class ConfigClass
     {
         public string ImagePath { get; set; }
+        public string CustomActions { get; set; }
     }
 }

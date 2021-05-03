@@ -330,5 +330,10 @@ namespace CaptureFS
         {
             timerFS.Interval = (TimeSpan)e.NewValue;
         }
+
+        private void rdCustomActions_Checked(object sender, RoutedEventArgs e)
+        {
+            txtCustom.IsEnabled = true;
+        }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CaptureFS"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="CaptureFS.MainWindow"
         mc:Ignorable="d"
-        Title="CaptureFS" Height="329.353" Width="353.335" Background="#FFFEFFE6" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="13.png">
+        Title="CaptureFS" Height="368.985" Width="353.335" Background="#FFFEFFE6" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="13.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -33,10 +33,12 @@
             <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLookright">Look Right (Numpad 6)</RadioButton>
             <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdIncreaseAlt">Increase Altitude (R)</RadioButton>
             <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdDecreaseAlt">Decrease Altitude (F)</RadioButton>
+            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdCustomActions" Checked="rdCustomActions_Checked">Custom</RadioButton>
         </StackPanel>
         <Label FontWeight="Bold" Content="Images Saved:" HorizontalAlignment="Left" Margin="5,207,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Height="26" Width="90"/>
         <Label Content="0" x:Name="lblImagesSaved" HorizontalAlignment="Left" Margin="94,208,0,0" VerticalAlignment="Top" Width="41" Height="26"/>
-        <Label Content="Version"  Name="lblVersion" FontSize="10px" HorizontalAlignment="Left" Margin="4,272,0,0" VerticalAlignment="Top" Width="333" Height="22"/>
+        <Label Content="Version"  Name="lblVersion" FontSize="10px" HorizontalAlignment="Left" Margin="4,314,0,0" VerticalAlignment="Top" Width="333" Height="22"/>
+        <TextBox x:Name="txtCustom" HorizontalAlignment="Left" Height="18" Margin="151,286,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="10" IsEnabled="False"/>
 
     </Grid>
 </Window>

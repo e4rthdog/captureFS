@@ -66,7 +66,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ReachFramework" />
@@ -145,17 +145,17 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Costura.Fody">
-      <Version>4.1.0</Version>
+      <Version>5.7.0</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Fody">
-      <Version>6.5.1</Version>
+      <Version>6.6.2</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="FSUIPCClientDLL">
-      <Version>3.1.27</Version>
+      <Version>3.2.20</Version>
     </PackageReference>
     <PackageReference Include="sharpconfig">
       <Version>3.2.9.1</Version>

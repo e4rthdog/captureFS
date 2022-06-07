@@ -12,14 +12,14 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Button x:Name="btnFS" Content="Connect" Click="btnFS_Click" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Width="115" Height="37"/>
-        <Label Content="Disconnected" FontWeight="Bold" Foreground="Red" x:Name="lblStatus" HorizontalAlignment="Left" Margin="147,20,0,0" VerticalAlignment="Top" Width="232" Height="26"/>
+        <Label Content="Disconnected" FontWeight="Bold" Foreground="Red" x:Name="lblStatus" HorizontalAlignment="Left" Margin="147,20,0,0" VerticalAlignment="Top" Width="232" Height="26" Grid.ColumnSpan="2"/>
         <Button Name="btnPath" Content="Image Path" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top" Width="115" Click="btnPath_Click" Height="38"/>
-        <Label Content="Not Defined" Name="lblPath" FontWeight="Bold" HorizontalAlignment="Left" Margin="147,60,0,0" VerticalAlignment="Top" Width="232" Height="26"/>
+        <Label Content="Not Defined" Name="lblPath" FontWeight="Bold" HorizontalAlignment="Left" Margin="147,60,0,0" VerticalAlignment="Top" Width="232" Height="26" Grid.ColumnSpan="2"/>
         <Label FontWeight="Bold" Content="Status:" HorizontalAlignment="Left" Margin="147,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Height="26" Width="48"/>
         <Label FontWeight="Bold" Content="Path:" HorizontalAlignment="Left" Margin="147,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Height="26" Width="38"/>
-        <syncfusion:TimeSpanEdit x:Name="timeInterval" ValueChanged="timeInterval_ValueChanged" HorizontalAlignment="Left" Height="22" Margin="10,121,0,0" TextWrapping="Wrap" Text="TimeSpanEdit" VerticalAlignment="Top" Width="115" Format="s" Value="0:0:0:2"/>
+
         <Label FontWeight="Bold" Content="Interval (seconds)" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Width="115" Height="26"/>
-        <Button Content="Start Capture" Name="btnCapture" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" Width="115" Click="btnCapture_Click" Height="38"/>
+        <Button Content="Start Capture" Name="btnCapture" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Width="115" Click="btnCapture_Click" Height="38"/>
         <StackPanel Name="stackFSActions" HorizontalAlignment="Left" Height="195" Margin="151,92,0,0" VerticalAlignment="Top" Width="170">
             <Label FontWeight="Bold" Margin="-3,0,2.6,0">FS Actions (Drone Camera)</Label>
             <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdNone" IsChecked="True">Disabled</RadioButton>
@@ -49,10 +49,14 @@
                 </RadioButton.ToolTip>
             </RadioButton>
         </StackPanel>
-        <Label FontWeight="Bold" Content="Images Saved:" HorizontalAlignment="Left" Margin="5,207,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Height="26" Width="90"/>
-        <Label Content="0" x:Name="lblImagesSaved" HorizontalAlignment="Left" Margin="94,208,0,0" VerticalAlignment="Top" Width="41" Height="26"/>
+        <Label FontWeight="Bold" Content="Images Saved:" HorizontalAlignment="Left" Margin="5,220,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Height="26" Width="90"/>
+        <Label Content="0" x:Name="lblImagesSaved" HorizontalAlignment="Left" Margin="94,221,0,0" VerticalAlignment="Top" Width="41" Height="26"/>
         <Label Content="Version"  Name="lblVersion" FontSize="10px" HorizontalAlignment="Left" Margin="4,312,0,0" VerticalAlignment="Top" Width="333" Height="22"/>
         <TextBox x:Name="txtCustom" HorizontalAlignment="Left" Height="18" Margin="151,286,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="10" IsEnabled="False" LostFocus="txtCustom_LostFocus"/>
+        <TextBox x:Name="txtInterval" HorizontalAlignment="Left" Margin="10,150,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="31" IsEnabled="False" Height="17"/>
+        <Button x:Name="btnIntervalDown" Content="-" HorizontalAlignment="Right" Margin="0,151,210,0" VerticalAlignment="Top" RenderTransformOrigin="-0.101,-0.048" Width="17" Height="17" Click="btnIntervalDown_Click"/>
+        <Button x:Name="btnIntervalUp" Content="+" HorizontalAlignment="Left" Margin="93,151,0,0" VerticalAlignment="Top" Width="17" Height="17" Click="btnIntervalUp_Click"/>
+        <Border BorderBrush="Black" BorderThickness="1"/>
 
     </Grid>
 </Window>

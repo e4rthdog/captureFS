@@ -113,7 +113,7 @@ namespace CaptureFS
         private void Setup()
         {
             timerFS = new DispatcherTimer();
-            timerFS.Interval = new TimeSpan(0, 0, 2);
+            timerFS.Interval = new TimeSpan(0, 0, 5);
             timerFS.Tick += timerFS_Tick;
             timerFS.IsEnabled = false;
         }
@@ -348,11 +348,6 @@ namespace CaptureFS
                 System.Windows.MessageBox.Show("Path is empty!", "Error");
             }
         }
-        private void timeInterval_ValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            timerFS.Interval = (TimeSpan)e.NewValue;
-        }
-
         private void rdCustomActions_Checked(object sender, RoutedEventArgs e)
         {
             txtCustom.IsEnabled = true;
@@ -367,6 +362,18 @@ namespace CaptureFS
         {
             cfg.CustomActions = txtCustom.Text;
             Util.SaveConfig(cfg);
+        }
+
+        private void btnIntervalUp_Click(object sender, RoutedEventArgs e)
+        {
+            txtInterval.Text = txtInterval.Text == "999" ? "999" : (Convert.ToInt32(txtInterval.Text) + 1).ToString();
+            timerFS.Interval = TimeSpan.FromSeconds(Convert.ToInt32(txtInterval.Text));
+        }
+
+        private void btnIntervalDown_Click(object sender, RoutedEventArgs e)
+        {
+            txtInterval.Text = txtInterval.Text == "1" ? "1" : (Convert.ToInt32(txtInterval.Text) - 1).ToString();
+            timerFS.Interval = TimeSpan.FromSeconds(Convert.ToInt32(txtInterval.Text));
         }
     }
 }

@@ -87,6 +87,7 @@ namespace CaptureFS
             {
                 imagePath = cfg.ImagePath;
                 txtCustom.Text = cfg.CustomActions;
+                timerFS.Interval = new TimeSpan(0, 0, cfg.TimerInterval);
             }
             else
             {
@@ -94,8 +95,10 @@ namespace CaptureFS
                 txtCustom.Text = string.Empty;
                 cfg.ImagePath = "";
                 cfg.CustomActions = "";
+                timerFS.Interval = new TimeSpan(0, 0, 5);
                 Util.SaveConfig(cfg);
             }
+            txtInterval.Text = timerFS.Interval.TotalSeconds.ToString();
             lblVersion.Content = String.Concat("Version - ", Util.GetVersion(), " - ", Util.GetCopyright());
             lblPath.Content = imagePath;
             try
@@ -368,12 +371,16 @@ namespace CaptureFS
         {
             txtInterval.Text = txtInterval.Text == "999" ? "999" : (Convert.ToInt32(txtInterval.Text) + 1).ToString();
             timerFS.Interval = TimeSpan.FromSeconds(Convert.ToInt32(txtInterval.Text));
+            cfg.TimerInterval = (int)timerFS.Interval.TotalSeconds;
+            Util.SaveConfig(cfg);
         }
 
         private void btnIntervalDown_Click(object sender, RoutedEventArgs e)
         {
             txtInterval.Text = txtInterval.Text == "1" ? "1" : (Convert.ToInt32(txtInterval.Text) - 1).ToString();
             timerFS.Interval = TimeSpan.FromSeconds(Convert.ToInt32(txtInterval.Text));
+            cfg.TimerInterval = (int)timerFS.Interval.TotalSeconds;
+            Util.SaveConfig(cfg);
         }
     }
 }

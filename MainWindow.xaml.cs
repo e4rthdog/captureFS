@@ -101,6 +101,8 @@ namespace CaptureFS
             txtInterval.Text = timerFS.Interval.TotalSeconds.ToString();
             lblVersion.Content = String.Concat("Version - ", Util.GetVersion(), " - ", Util.GetCopyright());
             lblPath.Content = imagePath;
+            lblJPEGQuality.Content = cfg.JPEGImageQuality;
+            sliderQuality.Value = cfg.JPEGImageQuality;
             try
             {
                 process = Process.GetProcessesByName("FlightSimulator").Single();
@@ -381,6 +383,18 @@ namespace CaptureFS
             timerFS.Interval = TimeSpan.FromSeconds(Convert.ToInt32(txtInterval.Text));
             cfg.TimerInterval = (int)timerFS.Interval.TotalSeconds;
             Util.SaveConfig(cfg);
+        }
+
+        private void sliderQuality_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            lblJPEGQuality.Content = Convert.ToInt32(e.NewValue).ToString();
+            cfg.JPEGImageQuality = Convert.ToInt32(e.NewValue);
+            Util.SaveConfig(cfg);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            sliderQuality.ValueChanged += new RoutedPropertyChangedEventHandler<double>(sliderQuality_ValueChanged);
         }
     }
 }

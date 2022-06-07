@@ -70,7 +70,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ReachFramework" />
-    <Reference Include="Syncfusion.Shared.WPF, Version=18.1460.0.42, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.Shared.WPF, Version=20.1460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\_APPS\Syncfusion\Essential Studio\WPF\20.1.0.47\precompiledassemblies\4.6\Syncfusion.Shared.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />

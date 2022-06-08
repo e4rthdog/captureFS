@@ -85,10 +85,12 @@ namespace CaptureFS
             if (cfg.ImageType.ToUpper() == "JPG")
             {
                 rdJPG.IsChecked = true;
+                sliderQuality.IsEnabled = true;
             }
             else if (cfg.ImageType.ToUpper() == "PNG")
             {
                 rdPNG.IsChecked = true;
+                sliderQuality.IsEnabled = false;
             }
             if (int.TryParse(cfg.ImageQuality.ToString(), out _) && cfg.ImageQuality <= 100 && cfg.ImageQuality >= 10)
             {
@@ -439,6 +441,18 @@ namespace CaptureFS
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             sliderQuality.ValueChanged += new RoutedPropertyChangedEventHandler<double>(sliderQuality_ValueChanged);
+            rdPNG.Checked += new RoutedEventHandler(rdPNG_Checked);
+            rdJPG.Checked += new RoutedEventHandler(rdJPG_Checked);
+        }
+
+        private void rdPNG_Checked(object sender, RoutedEventArgs e)
+        {
+            sliderQuality.IsEnabled = false;
+        }
+
+        private void rdJPG_Checked(object sender, RoutedEventArgs e)
+        {
+            sliderQuality.IsEnabled = true;
         }
     }
 }

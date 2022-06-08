@@ -123,16 +123,16 @@ namespace CaptureFS
             lblPath.Content = imagePath;
             lblJPEGQuality.Content = cfg.ImageQuality;
             sliderQuality.Value = cfg.ImageQuality;
-            //try
-            //{
-            //    process = Process.GetProcessesByName("FlightSimulator").Single();
-            //}
-            //catch
-            //{
-            //    System.Windows.MessageBox.Show("MSFS is NOT Running!!!", "ERROR");
-            //    Environment.Exit(0);
-            //}
-            //hwnd = process.MainWindowHandle;
+            try
+            {
+                process = Process.GetProcessesByName("FlightSimulator").Single();
+            }
+            catch
+            {
+                System.Windows.MessageBox.Show("Warning MSFS is NOT Running!!!", "ERROR");
+                Environment.Exit(0);
+            }
+            hwnd = process.MainWindowHandle;
         }
 
         private void Setup()

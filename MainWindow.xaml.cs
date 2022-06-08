@@ -448,11 +448,15 @@ namespace CaptureFS
         private void rdPNG_Checked(object sender, RoutedEventArgs e)
         {
             sliderQuality.IsEnabled = false;
+            cfg.ImageType = "PNG";
+            Util.SaveConfig(cfg);
         }
 
         private void rdJPG_Checked(object sender, RoutedEventArgs e)
         {
             sliderQuality.IsEnabled = true;
+            cfg.ImageType = "JPG";
+            Util.SaveConfig(cfg);
         }
     }
 }

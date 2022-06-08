@@ -286,10 +286,11 @@ namespace CaptureFS
         private void SavePicture()
         {
             var img = CaptureWindow(hwnd);
-            var fullpath = string.Format(@"{1}\{0:000}.{2}", image_counter, imagePath, cfg.ImageType);
+            var fullpath = string.Format(@"{1}\{0:000}.{2}", image_counter, imagePath, rdJPG.IsChecked == true ? rdJPG.Content : rdPNG.Content);
             EncoderParameters myEncoderParameters = new EncoderParameters(1);
             System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
-            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, Convert.ToInt64(cfg.ImageQuality));
+            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, Convert.ToInt32(sliderQuality.Value));
+            myEncoderParameters.Param[0] = myEncoderParameter;
             if (rdPNG.IsChecked == true)
             {
                 img.Save(fullpath, GetEncoder(ImageFormat.Png), myEncoderParameters);

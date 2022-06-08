@@ -287,10 +287,33 @@ namespace CaptureFS
         {
             var img = CaptureWindow(hwnd);
             var fullpath = string.Format(@"{1}\{0:000}.{2}", image_counter, imagePath, cfg.ImageType);
-            img.Save(fullpath, ImageFormat.Png);
+            EncoderParameters myEncoderParameters = new EncoderParameters(1);
+            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, Convert.ToInt64(cfg.ImageQuality));
+            if (rdPNG.IsChecked == true)
+            {
+                img.Save(fullpath, GetEncoder(ImageFormat.Png), myEncoderParameters);
+            }
+            else
+            {
+                img.Save(fullpath, GetEncoder(ImageFormat.Jpeg), myEncoderParameters);
+            }
+
             img.Dispose();
             lblImagesSaved.Content = string.Format("{0:000}", image_counter);
             image_counter++;
+        }
+        private ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
         }
         public Bitmap CaptureWindow(IntPtr hWnd)
         {

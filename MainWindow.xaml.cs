@@ -98,21 +98,26 @@ namespace CaptureFS
             {
                 sliderQuality.Value = 69;
             }
-            if (Directory.Exists(cfg.ImagePath))
+            txtCustom.Text = cfg.CustomActions;
+            if (int.TryParse(cfg.TimerInterval.ToString(), out _))
             {
-                imagePath = cfg.ImagePath;
-                txtCustom.Text = cfg.CustomActions;
                 timerFS.Interval = new TimeSpan(0, 0, cfg.TimerInterval);
             }
             else
             {
-                imagePath = string.Empty;
-                txtCustom.Text = string.Empty;
-                cfg.ImagePath = "";
-                cfg.CustomActions = "";
                 timerFS.Interval = new TimeSpan(0, 0, 5);
-                Util.SaveConfig(cfg);
+                cfg.TimerInterval = 5;
             }
+            if (Directory.Exists(cfg.ImagePath))
+            {
+                imagePath = cfg.ImagePath;
+            }
+            else
+            {
+                imagePath = "C:\\";
+                cfg.ImagePath = imagePath;
+            }
+            Util.SaveConfig(cfg);
             txtInterval.Text = timerFS.Interval.TotalSeconds.ToString();
             lblVersion.Content = String.Concat("Version - ", Util.GetVersion(), " - ", Util.GetCopyright());
             lblPath.Content = imagePath;

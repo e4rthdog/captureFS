@@ -82,6 +82,22 @@ namespace CaptureFS
             InitializeComponent();
             HandleDroneActions(false);
             cfg = Util.LoadConfig("MAIN");
+            if (cfg.ImageType.ToUpper() == "JPG")
+            {
+                rdJPG.IsChecked = true;
+            }
+            else if (cfg.ImageType.ToUpper() == "PNG")
+            {
+                rdPNG.IsChecked = true;
+            }
+            if (int.TryParse(cfg.ImageQuality.ToString(), out _) && cfg.ImageQuality <= 100 && cfg.ImageQuality >= 10)
+            {
+                sliderQuality.Value = cfg.ImageQuality;
+            }
+            else
+            {
+                sliderQuality.Value = 69;
+            }
             if (Directory.Exists(cfg.ImagePath))
             {
                 imagePath = cfg.ImagePath;
@@ -100,8 +116,8 @@ namespace CaptureFS
             txtInterval.Text = timerFS.Interval.TotalSeconds.ToString();
             lblVersion.Content = String.Concat("Version - ", Util.GetVersion(), " - ", Util.GetCopyright());
             lblPath.Content = imagePath;
-            lblJPEGQuality.Content = cfg.JPEGImageQuality;
-            sliderQuality.Value = cfg.JPEGImageQuality;
+            lblJPEGQuality.Content = cfg.ImageQuality;
+            sliderQuality.Value = cfg.ImageQuality;
             //try
             //{
             //    process = Process.GetProcessesByName("FlightSimulator").Single();
@@ -387,7 +403,7 @@ namespace CaptureFS
         private void sliderQuality_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lblJPEGQuality.Content = Convert.ToInt32(e.NewValue).ToString();
-            cfg.JPEGImageQuality = Convert.ToInt32(e.NewValue);
+            cfg.ImageQuality = Convert.ToInt32(e.NewValue);
             Util.SaveConfig(cfg);
         }
 

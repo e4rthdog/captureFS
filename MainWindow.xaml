@@ -16,8 +16,8 @@
         </Grid>
         <Grid Margin="0,140,0,0" Width="134" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Label FontWeight="Bold" Content="Image Type/Quality" HorizontalAlignment="Left" Margin="6,0,0,0" VerticalAlignment="Top" Width="128" Height="26" Grid.Column="1"/>
-            <RadioButton GroupName="ImageType" Content="JPG" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" FontSize="11" IsChecked="True" Grid.Column="1" Height="14" Width="37"/>
-            <RadioButton GroupName="ImageType" Content="PNG" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" FontSize="11" Grid.Column="1" Height="14" Width="41"/>
+            <RadioButton x:Name="rdJPG" GroupName="ImageType" Content="JPG" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" FontSize="11" IsChecked="True" Grid.Column="1" Height="14" Width="37"/>
+            <RadioButton x:Name="rdPNG" GroupName="ImageType" Content="PNG" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" FontSize="11" Grid.Column="1" Height="14" Width="41"/>
             <Slider x:Name="sliderQuality" Margin="6,57,0,13" Maximum="100" Minimum="10" LargeChange="5" SmallChange="3" Value="80" TickFrequency="5" Cursor="Hand" Width="128" Height="26" ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Column="1" />
             <Label Content="JPEG Quality:" Margin="7,74,0,0" VerticalAlignment="Top" FontSize="10" Height="23" Width="68" HorizontalAlignment="Left"/>
             <Label x:Name="lblJPEGQuality" Content="qqq" HorizontalAlignment="Left" Margin="80,74,0,0" VerticalAlignment="Top" FontSize="10"/>

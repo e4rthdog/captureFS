@@ -317,7 +317,7 @@ namespace CaptureFS
                 }
             }
             return null;
-        }
+        } 
         public Bitmap CaptureWindow(IntPtr hWnd)
         {
             RECT region;

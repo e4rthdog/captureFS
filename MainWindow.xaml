@@ -11,8 +11,8 @@
         <Grid Margin="0,91,219,218" Width="134" Height="44" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Label FontWeight="Bold" Content="Interval (seconds)" HorizontalAlignment="Left" Margin="6,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Width="115" Height="26" Grid.Column="1"/>
             <TextBox x:Name="txtInterval" Margin="10,25,79,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" IsEnabled="False" Height="17" HorizontalAlignment="Left" Width="31"  />
-            <Button x:Name="btnIntervalDown" Content="-" HorizontalAlignment="Left" Margin="75,25,0,0" VerticalAlignment="Top" Width="17" Height="17" Click="btnIntervalDown_Click" Grid.RowSpan="1" Grid.ColumnSpan="1" />
-            <Button x:Name="btnIntervalUp" Content="+" HorizontalAlignment="Left" Margin="50,25,0,0" VerticalAlignment="Top" Width="17" Height="17" Click="btnIntervalUp_Click" Grid.Row="1" VerticalContentAlignment="Center"/>
+            <Button x:Name="btnIntervalDown" Content="-" HorizontalAlignment="Left" Margin="56,25,0,0" VerticalAlignment="Top" Width="16" Height="17" Click="btnIntervalDown_Click" Grid.RowSpan="1" />
+            <Button x:Name="btnIntervalUp" Content="+" HorizontalAlignment="Left" Margin="81,25,0,0" VerticalAlignment="Top" Width="16" Height="17" Click="btnIntervalUp_Click" VerticalContentAlignment="Center"/>
         </Grid>
         <Grid Margin="0,140,0,0" Width="134" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Label FontWeight="Bold" Content="Image Type/Quality" HorizontalAlignment="Left" Margin="6,0,0,0" VerticalAlignment="Top" Width="128" Height="26" Grid.Column="1"/>

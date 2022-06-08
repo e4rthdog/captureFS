@@ -6,53 +6,57 @@
         xmlns:local="clr-namespace:CaptureFS"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="CaptureFS.MainWindow"
         mc:Ignorable="d"
-        Title="CaptureFS" Height="368.985" Width="353.335" Background="#FFFEFFE6" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="13.png">
+        Title="CaptureFS" Height="368.985" Width="353.335" Background="#FFFEFFE6" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="13.png" ScrollViewer.VerticalScrollBarVisibility="Disabled" SizeToContent="WidthAndHeight" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Left="0" Loaded="Window_Loaded">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+        <Grid Margin="0,91,219,218" Width="134" Height="44" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Label FontWeight="Bold" Content="Interval (seconds)" HorizontalAlignment="Left" Margin="6,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Width="115" Height="26" Grid.Column="1"/>
+            <TextBox x:Name="txtInterval" Margin="10,25,79,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" IsEnabled="False" Height="17" HorizontalAlignment="Left" Width="31"  />
+            <Button x:Name="btnIntervalDown" Content="-" HorizontalAlignment="Left" Margin="56,25,0,0" VerticalAlignment="Top" Width="16" Height="17" Click="btnIntervalDown_Click" Grid.RowSpan="1" />
+            <Button x:Name="btnIntervalUp" Content="+" HorizontalAlignment="Left" Margin="81,25,0,0" VerticalAlignment="Top" Width="16" Height="17" Click="btnIntervalUp_Click" VerticalContentAlignment="Center"/>
+        </Grid>
+        <Grid Margin="0,140,0,0" Width="134" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Label FontWeight="Bold" Content="Image Type/Quality" HorizontalAlignment="Left" Margin="6,0,0,0" VerticalAlignment="Top" Width="128" Height="26" Grid.Column="1"/>
+            <RadioButton x:Name="rdJPG" GroupName="ImageType" Content="JPG" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" FontSize="11" IsChecked="True" Grid.Column="1" Height="14" Width="37"/>
+            <RadioButton x:Name="rdPNG" GroupName="ImageType" Content="PNG" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" FontSize="11" Grid.Column="1" Height="14" Width="41"/>
+            <Slider x:Name="sliderQuality" Margin="6,57,0,13" Maximum="100" Minimum="10" LargeChange="5" SmallChange="3" Value="80" TickFrequency="5" Cursor="Hand" Width="128" Height="26" ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Column="1" />
+            <Label Content="JPEG Quality:" Margin="10,74,0,0" VerticalAlignment="Top" FontSize="10" Height="23" Width="70" HorizontalAlignment="Left"/>
+            <Label x:Name="lblJPEGQuality" Content="qqq" HorizontalAlignment="Left" Margin="80,74,0,0" VerticalAlignment="Top" FontSize="10"/>
+        </Grid>
         <Button x:Name="btnFS" Content="Connect" Click="btnFS_Click" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Width="115" Height="37"/>
-        <Label Content="Disconnected" FontWeight="Bold" Foreground="Red" x:Name="lblStatus" HorizontalAlignment="Left" Margin="147,20,0,0" VerticalAlignment="Top" Width="232" Height="26"/>
-        <Button Name="btnPath" Content="Image Path" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top" Width="115" Click="btnPath_Click" Height="38"/>
-        <Label Content="Not Defined" Name="lblPath" FontWeight="Bold" HorizontalAlignment="Left" Margin="147,60,0,0" VerticalAlignment="Top" Width="232" Height="26"/>
+        <Label Content="Disconnected" FontWeight="Bold" Foreground="Red" x:Name="lblStatus" HorizontalAlignment="Left" Margin="147,20,0,0" VerticalAlignment="Top" Width="232" Height="26" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnPath" Content="Image Path" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top" Width="115" Click="btnPath_Click" Height="37"/>
+        <Label Content="Not Defined" x:Name="lblPath" FontWeight="Bold" HorizontalAlignment="Left" Margin="147,60,0,0" VerticalAlignment="Top" Width="232" Height="26" Grid.ColumnSpan="2"/>
         <Label FontWeight="Bold" Content="Status:" HorizontalAlignment="Left" Margin="147,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Height="26" Width="48"/>
         <Label FontWeight="Bold" Content="Path:" HorizontalAlignment="Left" Margin="147,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Height="26" Width="38"/>
-        <syncfusion:TimeSpanEdit x:Name="timeInterval" ValueChanged="timeInterval_ValueChanged" HorizontalAlignment="Left" Height="22" Margin="10,121,0,0" TextWrapping="Wrap" Text="TimeSpanEdit" VerticalAlignment="Top" Width="115" Format="s" Value="0:0:0:2"/>
-        <Label FontWeight="Bold" Content="Interval (seconds)" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Width="115" Height="26"/>
-        <Button Content="Start Capture" Name="btnCapture" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" Width="115" Click="btnCapture_Click" Height="38"/>
-        <StackPanel Name="stackFSActions" HorizontalAlignment="Left" Height="195" Margin="151,92,0,0" VerticalAlignment="Top" Width="170">
-            <Label FontWeight="Bold" Margin="-3,0,2.6,0">FS Actions (Drone Camera)</Label>
-            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdNone" IsChecked="True">Disabled</RadioButton>
-            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdForward">Forward (W)</RadioButton>
-            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdBackwards">Backward (S)</RadioButton>
-            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLeft">Left (A)</RadioButton>
-            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdRight">Right (D)</RadioButton>
-            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLookup">Look Up (Numpad8)</RadioButton>
-            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLookdown">Look Down (Numpad2)</RadioButton>
-            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLookleft">Look Left (Numpad4)</RadioButton>
-            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdLookright">Look Right (Numpad6)</RadioButton>
-            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdIncreaseAlt">Increase Altitude (R)</RadioButton>
-            <RadioButton GroupName="DroneActions" FontSize="11px" Name="rdDecreaseAlt">Decrease Altitude (F)</RadioButton>
-            <RadioButton ToolTipService.ShowDuration="5000" GroupName="DroneActions" FontSize="11px" Name="rdCustomActions" Checked="rdCustomActions_Checked" Unchecked="rdCustomActions_Unchecked">Custom
+        <Button Content="Start Capture" x:Name="btnCapture" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Width="115" Click="btnCapture_Click" Height="38"/>
+        <StackPanel x:Name="stackFSActions" HorizontalAlignment="Left" Height="195" Margin="151,92,0,0" VerticalAlignment="Top" Width="170">
+            <Label FontWeight="Bold" Margin="-3,0,2.6,0" Content="FS Actions (Drone Camera)"/>
+            <RadioButton GroupName="DroneActions" FontSize="11px" x:Name="rdNone" IsChecked="True" Content="Disabled"/>
+            <RadioButton GroupName="DroneActions" FontSize="11px" x:Name="rdForward" Content="Forward (W)"/>
+            <RadioButton GroupName="DroneActions" FontSize="11px" x:Name="rdBackwards" Content="Backward (S)"/>
+            <RadioButton GroupName="DroneActions" FontSize="11px" x:Name="rdLeft" Content="Left (A)"/>
+            <RadioButton GroupName="DroneActions" FontSize="11px" x:Name="rdRight" Content="Right (D)"/>
+            <RadioButton GroupName="DroneActions" FontSize="11px" x:Name="rdLookup" Content="Look Up (Numpad8)"/>
+            <RadioButton GroupName="DroneActions" FontSize="11px" x:Name="rdLookdown" Content="Look Down (Numpad2)"/>
+            <RadioButton GroupName="DroneActions" FontSize="11px" x:Name="rdLookleft" Content="Look Left (Numpad4)"/>
+            <RadioButton GroupName="DroneActions" FontSize="11px" x:Name="rdLookright" Content="Look Right (Numpad6)"/>
+            <RadioButton GroupName="DroneActions" FontSize="11px" x:Name="rdIncreaseAlt" Content="Increase Altitude (R)"/>
+            <RadioButton GroupName="DroneActions" FontSize="11px" x:Name="rdDecreaseAlt" Content="Decrease Altitude (F)"/>
+            <RadioButton ToolTipService.ShowDuration="5000" GroupName="DroneActions" FontSize="11px" x:Name="rdCustomActions" Checked="rdCustomActions_Checked" Unchecked="rdCustomActions_Unchecked" Content="Custom">
                 <RadioButton.ToolTip>
                     <StackPanel>
-                        <TextBlock FontWeight="Bold" FontSize="12" Margin="0,0,0,5">Sequence of actions</TextBlock>
-                        <TextBlock>
-                            Separate the actions with comma (,). <LineBreak />
-                            Use valid values from FS Actions above: <LineBreak /><LineBreak />
-                            W,S,A,D,NUMPAD8,NUMPAD2,NUMPAD4,NUMPAD6,R,F
-                        </TextBlock>
+                        <TextBlock FontWeight="Bold" FontSize="12" Margin="0,0,0,5"><Run Text="Sequence of actions"/></TextBlock>
+                        <TextBlock><Run Text="Separate the actions with comma (,)."/><LineBreak /><Run Text="Use valid values from FS Actions above:"/><LineBreak /><LineBreak /><Run Text="W,S,A,D,NUMPAD8,NUMPAD2,NUMPAD4,NUMPAD6,R,F"/></TextBlock>
                         <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
-                        <TextBlock FontStyle="Italic">Example: w,r,numpad6<LineBreak/></TextBlock>
-                        <TextBlock FontStyle="Italic">Case is NOT important!<LineBreak/></TextBlock>
+                        <TextBlock FontStyle="Italic"><Run Text="Example: w,r,numpad6"/><LineBreak/></TextBlock>
+                        <TextBlock FontStyle="Italic"><Run Text="Case is NOT important!"/><LineBreak/></TextBlock>
                     </StackPanel>
                 </RadioButton.ToolTip>
             </RadioButton>
         </StackPanel>
-        <Label FontWeight="Bold" Content="Images Saved:" HorizontalAlignment="Left" Margin="5,207,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Height="26" Width="90"/>
-        <Label Content="0" x:Name="lblImagesSaved" HorizontalAlignment="Left" Margin="94,208,0,0" VerticalAlignment="Top" Width="41" Height="26"/>
-        <Label Content="Version"  Name="lblVersion" FontSize="10px" HorizontalAlignment="Left" Margin="4,312,0,0" VerticalAlignment="Top" Width="333" Height="22"/>
-        <TextBox x:Name="txtCustom" HorizontalAlignment="Left" Height="18" Margin="151,286,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="10" IsEnabled="False" LostFocus="txtCustom_LostFocus"/>
-
+        <Label FontWeight="Bold" Content="Images Saved:" HorizontalAlignment="Left" Margin="5,285,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.317,7.273" Height="26" Width="90"/>
+        <Label Content="0" x:Name="lblImagesSaved" HorizontalAlignment="Left" Margin="94,286,0,0" VerticalAlignment="Top" Width="41" Height="26"/>
+        <Label Content="Version"  x:Name="lblVersion" FontSize="10px" HorizontalAlignment="Left" Margin="4,312,0,0" VerticalAlignment="Top" Width="333" Height="22"/>
+        <TextBox x:Name="txtCustom" HorizontalAlignment="Left" Margin="151,0,0,49" TextWrapping="Wrap" Width="120" FontSize="10" IsEnabled="False" LostFocus="txtCustom_LostFocus" Height="18" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

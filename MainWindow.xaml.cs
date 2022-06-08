@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.InteropServices;
 using System.Drawing;
 using System.ComponentModel;
@@ -83,28 +82,56 @@ namespace CaptureFS
             InitializeComponent();
             HandleDroneActions(false);
             cfg = Util.LoadConfig("MAIN");
-            if (Directory.Exists(cfg.ImagePath))
+            if (cfg.ImageType.ToUpper() == "JPG")
             {
-                imagePath = cfg.ImagePath;
-                txtCustom.Text = cfg.CustomActions;
+                rdJPG.IsChecked = true;
+                sliderQuality.IsEnabled = true;
+            }
+            else if (cfg.ImageType.ToUpper() == "PNG")
+            {
+                rdPNG.IsChecked = true;
+                sliderQuality.IsEnabled = false;
+            }
+            if (int.TryParse(cfg.ImageQuality.ToString(), out _) && cfg.ImageQuality <= 100 && cfg.ImageQuality >= 10)
+            {
+                sliderQuality.Value = cfg.ImageQuality;
             }
             else
             {
-                imagePath = string.Empty;
-                txtCustom.Text = string.Empty;
-                cfg.ImagePath = "";
-                cfg.CustomActions = "";
-                Util.SaveConfig(cfg);
+                sliderQuality.Value = 69;
             }
+            txtCustom.Text = cfg.CustomActions;
+            if (int.TryParse(cfg.TimerInterval.ToString(), out _))
+            {
+                timerFS.Interval = new TimeSpan(0, 0, cfg.TimerInterval);
+            }
+            else
+            {
+                timerFS.Interval = new TimeSpan(0, 0, 5);
+                cfg.TimerInterval = 5;
+            }
+            if (Directory.Exists(cfg.ImagePath))
+            {
+                imagePath = cfg.ImagePath;
+            }
+            else
+            {
+                imagePath = "C:\\";
+                cfg.ImagePath = imagePath;
+            }
+            Util.SaveConfig(cfg);
+            txtInterval.Text = timerFS.Interval.TotalSeconds.ToString();
             lblVersion.Content = String.Concat("Version - ", Util.GetVersion(), " - ", Util.GetCopyright());
             lblPath.Content = imagePath;
+            lblJPEGQuality.Content = cfg.ImageQuality;
+            sliderQuality.Value = cfg.ImageQuality;
             try
             {
                 process = Process.GetProcessesByName("FlightSimulator").Single();
             }
             catch
             {
-                System.Windows.MessageBox.Show("MSFS is NOT Running!!!", "ERROR");
+                System.Windows.MessageBox.Show("Warning MSFS is NOT Running!!!", "ERROR");
                 Environment.Exit(0);
             }
             hwnd = process.MainWindowHandle;
@@ -113,7 +140,7 @@ namespace CaptureFS
         private void Setup()
         {
             timerFS = new DispatcherTimer();
-            timerFS.Interval = new TimeSpan(0, 0, 2);
+            timerFS.Interval = new TimeSpan(0, 0, 5);
             timerFS.Tick += timerFS_Tick;
             timerFS.IsEnabled = false;
         }
@@ -261,12 +288,36 @@ namespace CaptureFS
         private void SavePicture()
         {
             var img = CaptureWindow(hwnd);
-            var fullpath = string.Format(@"{1}\{0:000}.png", image_counter, imagePath);
-            img.Save(fullpath, ImageFormat.Png);
+            var fullpath = string.Format(@"{1}\{0:000}.{2}", image_counter, imagePath, rdJPG.IsChecked == true ? rdJPG.Content : rdPNG.Content);
+            EncoderParameters myEncoderParameters = new EncoderParameters(1);
+            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, Convert.ToInt32(sliderQuality.Value));
+            myEncoderParameters.Param[0] = myEncoderParameter;
+            if (rdPNG.IsChecked == true)
+            {
+                img.Save(fullpath, GetEncoder(ImageFormat.Png), myEncoderParameters);
+            }
+            else
+            {
+                img.Save(fullpath, GetEncoder(ImageFormat.Jpeg), myEncoderParameters);
+            }
+
             img.Dispose();
             lblImagesSaved.Content = string.Format("{0:000}", image_counter);
             image_counter++;
         }
+        private ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
+        } 
         public Bitmap CaptureWindow(IntPtr hWnd)
         {
             RECT region;
@@ -348,11 +399,6 @@ namespace CaptureFS
                 System.Windows.MessageBox.Show("Path is empty!", "Error");
             }
         }
-        private void timeInterval_ValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            timerFS.Interval = (TimeSpan)e.NewValue;
-        }
-
         private void rdCustomActions_Checked(object sender, RoutedEventArgs e)
         {
             txtCustom.IsEnabled = true;
@@ -366,6 +412,50 @@ namespace CaptureFS
         private void txtCustom_LostFocus(object sender, RoutedEventArgs e)
         {
             cfg.CustomActions = txtCustom.Text;
+            Util.SaveConfig(cfg);
+        }
+
+        private void btnIntervalUp_Click(object sender, RoutedEventArgs e)
+        {
+            txtInterval.Text = txtInterval.Text == "999" ? "999" : (Convert.ToInt32(txtInterval.Text) + 1).ToString();
+            timerFS.Interval = TimeSpan.FromSeconds(Convert.ToInt32(txtInterval.Text));
+            cfg.TimerInterval = (int)timerFS.Interval.TotalSeconds;
+            Util.SaveConfig(cfg);
+        }
+
+        private void btnIntervalDown_Click(object sender, RoutedEventArgs e)
+        {
+            txtInterval.Text = txtInterval.Text == "1" ? "1" : (Convert.ToInt32(txtInterval.Text) - 1).ToString();
+            timerFS.Interval = TimeSpan.FromSeconds(Convert.ToInt32(txtInterval.Text));
+            cfg.TimerInterval = (int)timerFS.Interval.TotalSeconds;
+            Util.SaveConfig(cfg);
+        }
+
+        private void sliderQuality_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            lblJPEGQuality.Content = Convert.ToInt32(e.NewValue).ToString();
+            cfg.ImageQuality = Convert.ToInt32(e.NewValue);
+            Util.SaveConfig(cfg);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            sliderQuality.ValueChanged += new RoutedPropertyChangedEventHandler<double>(sliderQuality_ValueChanged);
+            rdPNG.Checked += new RoutedEventHandler(rdPNG_Checked);
+            rdJPG.Checked += new RoutedEventHandler(rdJPG_Checked);
+        }
+
+        private void rdPNG_Checked(object sender, RoutedEventArgs e)
+        {
+            sliderQuality.IsEnabled = false;
+            cfg.ImageType = "PNG";
+            Util.SaveConfig(cfg);
+        }
+
+        private void rdJPG_Checked(object sender, RoutedEventArgs e)
+        {
+            sliderQuality.IsEnabled = true;
+            cfg.ImageType = "JPG";
             Util.SaveConfig(cfg);
         }
     }

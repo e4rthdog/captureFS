@@ -103,16 +103,16 @@ namespace CaptureFS
             lblPath.Content = imagePath;
             lblJPEGQuality.Content = cfg.JPEGImageQuality;
             sliderQuality.Value = cfg.JPEGImageQuality;
-            try
-            {
-                process = Process.GetProcessesByName("FlightSimulator").Single();
-            }
-            catch
-            {
-                System.Windows.MessageBox.Show("MSFS is NOT Running!!!", "ERROR");
-                Environment.Exit(0);
-            }
-            hwnd = process.MainWindowHandle;
+            //try
+            //{
+            //    process = Process.GetProcessesByName("FlightSimulator").Single();
+            //}
+            //catch
+            //{
+            //    System.Windows.MessageBox.Show("MSFS is NOT Running!!!", "ERROR");
+            //    Environment.Exit(0);
+            //}
+            //hwnd = process.MainWindowHandle;
         }
 
         private void Setup()
@@ -266,7 +266,7 @@ namespace CaptureFS
         private void SavePicture()
         {
             var img = CaptureWindow(hwnd);
-            var fullpath = string.Format(@"{1}\{0:000}.png", image_counter, imagePath);
+            var fullpath = string.Format(@"{1}\{0:000}.{2}", image_counter, imagePath, cfg.ImageType);
             img.Save(fullpath, ImageFormat.Png);
             img.Dispose();
             lblImagesSaved.Content = string.Format("{0:000}", image_counter);
